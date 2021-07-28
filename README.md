@@ -1,2 +1,2 @@
-# miracle-coding-blog
-미라클 코딩 블로그를 개발하는 저장소
+# MiracleCodingBlog
+MiracleCoding study 의 TIL 을 모아서 볼수 있는 홈페이지를 만드는 프로젝트입니다.

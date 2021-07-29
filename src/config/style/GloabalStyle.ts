@@ -10,14 +10,13 @@ ${reset};
 }
 
 body{
-    display:flex;
-    justify-content: center;
     width: 100%;
 }
 
 #root{
-    padding: 3rem 2rem;
-    max-width: 720px; 
+    padding: 3rem 0; 
+    max-width: 720px;
+    margin: 0 auto;
 }
 
 a{

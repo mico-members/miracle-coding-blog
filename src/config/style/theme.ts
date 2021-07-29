@@ -31,11 +31,13 @@ const theme: DefaultTheme = {
     bold2: '900',
   },
   color: {
-    main: '#FFCD3E',
-    inputBG: '#FFF5DE',
-    yellow: '#FFCD3E',
-    disable: '#AAAAAA',
-    gray: '#E7E6E1',
+    darkGray: '#14142B',
+    gray: '#F9F9F9',
+    white: '#fff',
+    green: '#71EFA3',
+    mint: '#B5EAEA',
+    whiteMint: '#EDF6E5',
+    purple: '#C6B4CE',
   },
   fontSize: {
     XXL: '2rem', // 32px

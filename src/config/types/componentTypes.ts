@@ -1,4 +1,4 @@
 export interface ILabel {
-    colorCode : string;
-    text : string;
+  colorCode: string;
+  text: string;
 }

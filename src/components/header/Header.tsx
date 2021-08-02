@@ -17,12 +17,15 @@ const Header = () => {
 const HeaderWrapper = styled.div`
   ${({ theme }) => theme.style.flexColumn}
 `;
+
 const LabelWrapper = styled.div`
   display: flex;
 `;
+
 const Title = styled.div`
+  ${({ theme }) => theme.style.flexCenter};
   width: 100%;
-  padding: 1rem;
+  padding: 3rem 0;
   font-size: ${({ theme }) => theme.fontSize.XXL};
 `;
 

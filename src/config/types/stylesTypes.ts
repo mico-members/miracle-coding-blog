@@ -6,11 +6,13 @@ export interface DefaultTheme {
     bold2: string;
   };
   color: {
-    main: string;
-    inputBG: string;
-    yellow: string;
-    disable: string;
+    darkGray: string;
     gray: string;
+    white: string;
+    green: string;
+    mint: string;
+    whiteMint: string;
+    purple: string;
   };
   fontSize: {
     XXL: string;

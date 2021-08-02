@@ -1,8 +1,7 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { useRecoilState } from 'recoil';
 import { articleListAtom } from '../config/atoms';
 import { IPR } from '../config/types/dataTypes';
-
 
 const Foo = () => {
   const [articleList, setArticleList] = useRecoilState(articleListAtom);
@@ -32,7 +31,7 @@ const Foo = () => {
       );
   }, []);
 
-  return <div onClick={()=>console.log(articleList)}>123</div>;
+  return <div onClick={() => console.log(articleList)}>123</div>;
 };
 
 export default Foo;

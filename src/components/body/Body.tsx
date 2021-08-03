@@ -1,16 +1,9 @@
-import React from 'react';
-import { ArticleItem } from './list/ArticleItem';
+import Articles from './list/Articles';
 
 const Body = () => {
   return (
     <>
-      <ArticleItem
-        date="2021-07-29"
-        link="https://avatars.githubusercontent.com/u/71962505?v=4"
-        condition={8}
-        userImgUrl=""
-        userName="eamon"
-      />
+      <Articles />
     </>
   );
 };

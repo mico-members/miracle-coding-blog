@@ -4,6 +4,7 @@ export interface ILabel {
 }
 
 export interface IArticleItem {
+  refCallback?: (node: any) => void;
   link: string;
   condition: number;
   userImgUrl: string;

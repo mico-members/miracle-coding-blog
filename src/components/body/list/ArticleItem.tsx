@@ -1,25 +1,27 @@
-import React from 'react';
 import styled from 'styled-components';
-import { theme } from '../../../config/style/theme';
 import { IArticleItem } from '../../../config/types/componentTypes';
 
 export const ArticleItem = ({
+  refCallback,
   link,
   condition,
   userImgUrl,
   userName,
   date,
 }: IArticleItem) => {
+  const handleClickArticle = () => {
+    window.open(link, '_blank');
+  };
+
   return (
-    <ArticleItemWrapper>
+    <ArticleItemWrapper ref={refCallback} onClick={handleClickArticle}>
       <ArticleAuthor>
-        <UserImg src={link} />
+        <UserImg src={userImgUrl} />
         <UserName>{userName}</UserName>
       </ArticleAuthor>
-
       <ArticleContent>
-        <span>😀 9/10</span>
-        <span>2021-07-28</span>
+        <span>😀 {condition}/10</span>
+        <span>{date}</span>
       </ArticleContent>
     </ArticleItemWrapper>
   );
@@ -30,7 +32,6 @@ const ArticleItemWrapper = styled.li`
   color: ${({ theme }) => theme.color.darkGray};
   padding: 1.5rem 1.8rem;
   background-color: ${({ theme }) => theme.color.gray};
-  /* width: 37.5rem; */
   border-radius: ${({ theme }) => theme.border.radius.S};
 
   &:hover {

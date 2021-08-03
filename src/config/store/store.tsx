@@ -48,7 +48,6 @@ const bodyParser = ({ body, base, user, number }: IPR) => {
 export const fetchData = selector<IArticle[]>({
   key: 'fetchDataSelector',
   get: async ({ get }) => {
-    console.log('data');
     const page = get(currentPage);
 
     const filterFetch = async (filterIndex: number) => {
@@ -76,7 +75,6 @@ export const fetchData = selector<IArticle[]>({
           },
         );
         const data = await response.json();
-        console.log('data', data);
         return data
           .map(bodyParser)
           .filter(({ id }: { id: number }) => id !== -1);

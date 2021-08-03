@@ -1,8 +1,11 @@
-import React from 'react';
+import { MutableRefObject, useCallback, useRef } from 'react';
+import { useRecoilState } from 'recoil';
 import styled from 'styled-components';
+import { currentPage } from '../../../config/store/store';
 import { IArticleItem } from '../../../config/types/componentTypes';
 
 export const ArticleItem = ({
+  refCallback,
   link,
   condition,
   userImgUrl,
@@ -10,12 +13,11 @@ export const ArticleItem = ({
   date,
 }: IArticleItem) => {
   return (
-    <ArticleItemWrapper>
+    <ArticleItemWrapper ref={refCallback}>
       <ArticleAuthor>
         <UserImg src={userImgUrl} />
         <UserName>{userName}</UserName>
       </ArticleAuthor>
-
       <ArticleContent>
         <span>😀 {condition}/10</span>
         <span>{date}</span>

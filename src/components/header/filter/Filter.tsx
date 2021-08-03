@@ -67,7 +67,7 @@ const FilterModal = () => {
     {
       id: 8,
       name: 'eve',
-      imgUrl: '',
+      imgUrl: 'https://avatars.githubusercontent.com/u/62237639?v=4',
     },
     {
       id: 9,

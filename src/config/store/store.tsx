@@ -48,23 +48,41 @@ const bodyParser = ({ body, base, user, number }: IPR) => {
 export const fetchData = selector<IArticle[]>({
   key: 'fetchDataSelector',
   get: async ({ get }) => {
+    console.log('data');
     const page = get(currentPage);
 
     const filterFetch = async (filterIndex: number) => {
       const author = authorList[filterIndex];
       const response = await fetch(
         `https://api.github.com/repos/mico-members/miracle-coding/pulls?state=closed&per_page=${per_page}&page=${page}&base=${author}`,
+        {
+          headers: {
+            Authorization: `token ${process.env.WEBPACK_GITHUB_TOKEN}`,
+          },
+        },
       );
       const data = await response.json();
       return data.map(bodyParser).filter(({ id }: { id: number }) => id !== -1);
     };
 
     const defaultFetch = async () => {
-      const response = await fetch(
-        `https://api.github.com/repos/mico-members/miracle-coding/pulls?state=closed&per_page=${per_page}&page=${page}`,
-      );
-      const data = await response.json();
-      return data.map(bodyParser).filter(({ id }: { id: number }) => id !== -1);
+      try {
+        const response = await fetch(
+          `https://api.github.com/repos/mico-members/miracle-coding/pulls?state=closed&per_page=${per_page}&page=${page}`,
+          {
+            headers: {
+              Authorization: `token ${process.env.WEBPACK_GITHUB_TOKEN}`,
+            },
+          },
+        );
+        const data = await response.json();
+        console.log('data', data);
+        return data
+          .map(bodyParser)
+          .filter(({ id }: { id: number }) => id !== -1);
+      } catch (error) {
+        console.error(error);
+      }
     };
 
     const reducer = async (acc: Promise<IArticle[]>, cur: number) => {
@@ -77,7 +95,7 @@ export const fetchData = selector<IArticle[]>({
     return get(filterIndexAtom).length === 0
       ? defaultFetch()
       : (await get(filterIndexAtom).reduce(reducer, Promise.resolve([]))).sort(
-          (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime(),
+          (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime(),
         );
   },
 });

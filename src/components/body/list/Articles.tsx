@@ -1,15 +1,15 @@
-import { useRecoilValue } from 'recoil';
+import { useRecoilValueLoadable } from 'recoil';
 import styled from 'styled-components';
-import { articleListAtom } from '../../../config/atoms';
+import { fetchData } from '../../../config/store/store';
 import { ArticleItem } from './ArticleItem';
 
 const Articles = () => {
-  const articleList = useRecoilValue(articleListAtom);
+  const articleList = useRecoilValueLoadable(fetchData);
 
   return (
     <ArticlesWrapper>
-      {articleList &&
-        articleList.map((articleItem) => (
+      {articleList.state === 'hasValue' &&
+        articleList.contents.map((articleItem) => (
           <ArticleItem
             key={articleItem.id}
             date={articleItem.date}

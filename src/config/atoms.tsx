@@ -5,3 +5,8 @@ export const articleListAtom = atom<Array<IArticle>>({
   key: 'articleList',
   default: [],
 });
+
+export const pageNumAtom = atom<number>({
+  key: 'pageNum',
+  default: 1,
+});

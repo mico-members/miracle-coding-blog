@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import Filter from './filter/Filter';
 import Label from './Label';
 
 const Header = () => {
@@ -6,7 +7,7 @@ const Header = () => {
     <HeaderWrapper>
       <LabelWrapper>
         <Label colorCode="#ABCDEF" text="test!!!" />
-        <Label colorCode="#00FF00" text="fooooooobarrrrrrrr" />
+        <Filter />
       </LabelWrapper>
       <Title>🌈Miracle Coding Blog🌈</Title>
     </HeaderWrapper>

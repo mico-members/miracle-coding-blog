@@ -1,7 +1,4 @@
-import { MutableRefObject, useCallback, useRef } from 'react';
-import { useRecoilState } from 'recoil';
 import styled from 'styled-components';
-import { currentPage } from '../../../config/store/store';
 import { IArticleItem } from '../../../config/types/componentTypes';
 
 export const ArticleItem = ({
@@ -12,8 +9,12 @@ export const ArticleItem = ({
   userName,
   date,
 }: IArticleItem) => {
+  const handleClickArticle = () => {
+    window.open(link, '_blank');
+  };
+
   return (
-    <ArticleItemWrapper ref={refCallback}>
+    <ArticleItemWrapper ref={refCallback} onClick={handleClickArticle}>
       <ArticleAuthor>
         <UserImg src={userImgUrl} />
         <UserName>{userName}</UserName>

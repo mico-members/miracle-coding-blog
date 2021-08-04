@@ -46,6 +46,7 @@ const bodyParser = ({
     return {
       id: number,
       link: html_url,
+      prLink: html_url,
       userImgUrl: user.avatar_url,
       userName: base.ref,
       date: `${date.getFullYear()}-${
@@ -57,6 +58,7 @@ const bodyParser = ({
   return {
     id: number,
     link: link || '잘못된 링크입니다.',
+    prLink: html_url,
     condition: parseInt(info[13].trim()),
     userImgUrl: user.avatar_url,
     userName: base.ref,

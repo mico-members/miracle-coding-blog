@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { IArticleItem } from '../../../config/types/componentTypes';
+import { timeCalculator } from '../../../config/utils/util';
 
 export const ArticleItem = ({
   refCallback,
@@ -21,7 +22,7 @@ export const ArticleItem = ({
       </ArticleAuthor>
       <ArticleContent>
         <span>😀 {condition}/10</span>
-        <span>{date}</span>
+        <span>{timeCalculator(date)}</span>
       </ArticleContent>
     </ArticleItemWrapper>
   );

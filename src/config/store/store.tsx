@@ -1,4 +1,4 @@
-import { atom, selector } from 'recoil';
+import { atom, constSelector, selector } from 'recoil';
 import { IArticle, IPR } from '../types/dataTypes';
 
 const per_page = 10;
@@ -49,11 +49,14 @@ export const fetchData = selector<IArticle[]>({
   key: 'fetchDataSelector',
   get: async ({ get }) => {
     const page = get(currentPage);
-
+    const filterPerPage = Math.floor(per_page / get(filterIndexAtom).length);
+    console.log(filterPerPage)
     const filterFetch = async (filterIndex: number) => {
       const author = authorList[filterIndex];
+
       const response = await fetch(
-        `https://api.github.com/repos/mico-members/miracle-coding/pulls?state=closed&per_page=${per_page}&page=${page}&base=${author}`,
+        `https://api.github.com/repos/mico-members/miracle-coding/pulls?state=closed&per_page=
+        ${filterPerPage}&page=${page}&base=${author}`,
         {
           headers: {
             Authorization: `token ${process.env.WEBPACK_GITHUB_TOKEN}`,

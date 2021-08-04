@@ -12,7 +12,7 @@ const setTextColor = (code: string): string => {
   return isDark ? '#000000' : '#FFFFFF';
 };
 
-const Label = ({ colorCode, text }: ILabel) => {
+const Label = ({ icon, colorCode, text }: ILabel) => {
   return <LabelWrapper {...{ colorCode }}>{text}</LabelWrapper>;
 };
 

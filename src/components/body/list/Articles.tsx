@@ -1,12 +1,12 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { useRecoilValueLoadable, useSetRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValueLoadable, useSetRecoilState } from 'recoil';
 import styled from 'styled-components';
 import { currentPage, fetchData } from '../../../config/store/store';
 import { IArticle } from '../../../config/types/dataTypes';
 import { ArticleItem } from './ArticleItem';
 
 const Articles = () => {
-  const setPageNum = useSetRecoilState(currentPage);
+  const [pageNum, setPageNum] = useRecoilState(currentPage);
   const articleList = useRecoilValueLoadable(fetchData);
   const [articles, setArticles] = useState<IArticle[]>([]);
 
@@ -24,7 +24,9 @@ const Articles = () => {
 
   useEffect(() => {
     if (articleList.state === 'hasValue') {
+      console.log(articleList.contents)
       setArticles((articles) => {
+        if (pageNum === 1) return articleList.contents;
         return [...articles, ...articleList.contents];
       });
     }
@@ -36,7 +38,7 @@ const Articles = () => {
         ({ id, date, link, condition, userImgUrl, userName }, index) => (
           <ArticleItem
             refCallback={
-              articles.length - 1 === index ? lastArticleElementRef : null
+              8 === index ? lastArticleElementRef : null
             }
             key={id}
             {...{ date, link, condition, userImgUrl, userName }}
@@ -51,7 +53,5 @@ const ArticlesWrapper = styled.ul`
   ${({ theme }) => theme.style.flexColumn};
   gap: 1rem;
 `;
-
-
 
 export default Articles;

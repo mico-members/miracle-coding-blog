@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import Author from './Author';
 
 const FilterModal = () => {
@@ -13,14 +13,27 @@ const FilterModal = () => {
 
 export default FilterModal;
 
+const ModalAction = keyframes`
+from {
+    transform: translateY(8px);
+    opacity:0
+  }
+
+  to {
+    transform: translateY(0px);
+    opacity:1
+  }
+`;
+
 const ModalWrapper = styled.div`
-  padding: 1rem 0;
+  padding: 0.5rem 0;
   position: absolute;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
   top: 50px;
   left: calc(45% - 35%);
   background: #f9f9f9;
   border-radius: ${({ theme }) => theme.border.radius.L};
+  animation: ${ModalAction} 0.1s ease-out;
 `;
 
 const authorList = [

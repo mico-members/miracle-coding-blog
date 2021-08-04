@@ -4,10 +4,11 @@ export interface ILabel {
 }
 
 export interface IArticleItem {
-  refCallback?: (node: any) => void;
+  refCallback?:  ((node: any) => void) | null;  
   link: string;
   condition: number;
   userImgUrl: string;
   userName: string;
   date: string;
 }
+

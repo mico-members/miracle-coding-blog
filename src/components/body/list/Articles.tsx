@@ -1,12 +1,12 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { useRecoilState, useRecoilValueLoadable } from 'recoil';
+import { useRecoilValueLoadable, useSetRecoilState } from 'recoil';
 import styled from 'styled-components';
 import { currentPage, fetchData } from '../../../config/store/store';
 import { IArticle } from '../../../config/types/dataTypes';
 import { ArticleItem } from './ArticleItem';
 
 const Articles = () => {
-  const [pageNum, setPageNum] = useRecoilState(currentPage);
+  const setPageNum = useSetRecoilState(currentPage);
   const articleList = useRecoilValueLoadable(fetchData);
   const [articles, setArticles] = useState<IArticle[]>([]);
 
@@ -16,7 +16,6 @@ const Articles = () => {
     if (observer.current) observer.current.disconnect();
     observer.current = new IntersectionObserver((entries) => {
       if (entries[0].isIntersecting) {
-        console.log('마지막놈');
         setPageNum((prevPageNum) => prevPageNum + 1);
       }
     });
@@ -26,40 +25,24 @@ const Articles = () => {
   useEffect(() => {
     if (articleList.state === 'hasValue') {
       setArticles((articles) => {
-        if (pageNum === 1) return articleList.contents;
         return [...articles, ...articleList.contents];
       });
     }
-  }, [articleList, pageNum]);
+  }, [articleList]);
 
   return (
     <ArticlesWrapper>
-      {articles.map((articleItem, index) => {
-        if (articles.length - 1 === index) {
-          return (
-            <ArticleItem
-              refCallback={lastArticleElementRef}
-              key={articleItem.id}
-              date={articleItem.date}
-              link={articleItem.link}
-              condition={articleItem.condition}
-              userImgUrl={articleItem.userImgUrl}
-              userName={articleItem.userName}
-            />
-          );
-        } else {
-          return (
-            <ArticleItem
-              key={articleItem.id}
-              date={articleItem.date}
-              link={articleItem.link}
-              condition={articleItem.condition}
-              userImgUrl={articleItem.userImgUrl}
-              userName={articleItem.userName}
-            />
-          );
-        }
-      })}
+      {articles.map(
+        ({ id, date, link, condition, userImgUrl, userName }, index) => (
+          <ArticleItem
+            refCallback={
+              articles.length - 1 === index ? lastArticleElementRef : null
+            }
+            key={id}
+            {...{ date, link, condition, userImgUrl, userName }}
+          />
+        ),
+      )}
     </ArticlesWrapper>
   );
 };
@@ -69,9 +52,6 @@ const ArticlesWrapper = styled.ul`
   gap: 1rem;
 `;
 
-const Div = styled.div`
-  height: 50px;
-  background-color: beige;
-`;
+
 
 export default Articles;

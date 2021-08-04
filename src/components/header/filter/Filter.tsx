@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import Label from '../Label';
 import DownIcon from '../../../images/down.svg';
 import UpIcon from '../../../images/up.svg';
+import Git from '../../../images/github-logo.svg';
 import FilterModal from './FilterModal';
 
 const Filter = () => {
@@ -17,6 +18,7 @@ const Filter = () => {
   });
   return (
     <FilterWrapper ref={currentDOM}>
+      <Label icon={<Git />} colorCode="#ABCDEF" text="GitHub" />
       <Label
         icon={isOn ? <UpIcon /> : <DownIcon />}
         text={'닉네임'}
@@ -28,12 +30,9 @@ const Filter = () => {
   );
 };
 
-
-
 const FilterWrapper = styled.div`
+  display: flex;
   position: relative;
 `;
-
-
 
 export default Filter;

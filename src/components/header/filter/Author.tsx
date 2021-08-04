@@ -11,14 +11,16 @@ interface IAuthor {
 const Author = ({ id, name, imgUrl }: IAuthor) => {
   const [filterIndex, setFilterIndex] = useRecoilState(filterIndexAtom);
   const isChecked = filterIndex.includes(id);
-  
+
   const check = () =>
-    setFilterIndex((arr) =>isChecked ? arr.filter((el) => el !== id) : [...arr, id]);
-    
+    setFilterIndex((arr) =>
+      isChecked ? arr.filter((el) => el !== id) : [...arr, id],
+    );
+
   return (
     <AuthorWrapper onClick={check}>
-      <CheckButton isChecked={isChecked} />
-      <User>
+      {/* <CheckButton isChecked={isChecked} /> */}
+      <User {...{ isChecked }}>
         <UserImg src={imgUrl} />
         <UserName>{name}</UserName>
       </User>
@@ -57,15 +59,18 @@ const AuthorWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin: 1rem;
+  margin: 0.6rem 1rem;
 `;
-const User = styled.div`
+const User = styled.div<{ isChecked: boolean }>`
+  cursor: pointer;
   position: relative;
-  width: 150px;
+  width: 170px;
   height: 42px;
-  background: #b5eaea;
+  background: ${({ isChecked }) => (isChecked ? '#b5eaea' : 'none')};
   border-radius: ${({ theme }) => theme.border.radius.S};
-  margin-left: 1rem;
+  &:hover {
+    background: #b5eaea;
+  }
 `;
 const UserImg = styled.img`
   position: absolute;

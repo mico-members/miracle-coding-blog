@@ -1,14 +1,14 @@
 import styled from 'styled-components';
 import Filter from './filter/Filter';
 import Label from './Label';
-import Git from '../../images/github-logo.svg';
+
 const Header = () => {
   return (
     <HeaderWrapper>
-      <LabelWrapper>
-        <Label icon={<Git />} colorCode="#ABCDEF" text="GitHub" />
+  
+        
         <Filter />
-      </LabelWrapper>
+ 
       <Title>🌈 Miracle Coding Blog 🌈</Title>
     </HeaderWrapper>
   );

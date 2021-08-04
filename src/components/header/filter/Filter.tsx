@@ -1,6 +1,9 @@
 import { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
+import Label from '../Label';
 import Author from './Author';
+import DownIcon from '../../../images/down.svg';
+import UpIcon from '../../../images/up.svg';
 
 const Filter = () => {
   const [isOn, setOn] = useState(false);
@@ -14,9 +17,12 @@ const Filter = () => {
   });
   return (
     <FilterWrapper ref={currentDOM}>
-      <FilterButton onClick={() => setOn((status) => !status)}>
-        닉네임
-      </FilterButton>
+      <Label
+        icon={isOn ? <UpIcon /> : <DownIcon />}
+        text={'닉네임'}
+        colorCode={'#b5eaea'}
+        onClick={() => setOn((status) => !status)}
+      />
       {isOn && <FilterModal />}
     </FilterWrapper>
   );
@@ -87,16 +93,10 @@ const FilterModal = () => {
 const FilterWrapper = styled.div`
   position: relative;
 `;
-const FilterButton = styled.div`
-  padding: 0.6rem 1rem;
-  width: fit-content;
-  background-color: #b5eaea;
-  color: #000000;
-  border: none;
-  border-radius: ${({ theme }) => theme.border.radius.L};
-`;
+
 const ModalWrapper = styled.div`
   position: absolute;
+  box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
   top: 40px;
   background: #f9f9f9;
   border-radius: ${({ theme }) => theme.border.radius.L};

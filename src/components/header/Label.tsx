@@ -1,29 +1,39 @@
+import { setTextColor } from '../../config/utils/util';
 import styled from 'styled-components';
 import { ILabel } from '../../config/types/componentTypes';
 
-const setTextColor = (code: string): string => {
-  const red = code.slice(1, 3);
-  const green = code.slice(3, 5);
-  const blue = code.slice(5, 7);
-  const isDark =
-    parseInt(red, 16) > parseInt('A0', 16) &&
-    parseInt(green, 16) > parseInt('A0', 16) &&
-    parseInt(blue, 16) > parseInt('A0', 16);
-  return isDark ? '#000000' : '#FFFFFF';
-};
-
-const Label = ({ icon, colorCode, text }: ILabel) => {
-  return <LabelWrapper {...{ colorCode }}>{text}</LabelWrapper>;
+const Label = ({ icon, colorCode, text, onClick }: ILabel) => {
+  return (
+    <LabelWrapper {...{ colorCode, onClick }}>
+      <IconWrapper>{icon}</IconWrapper>
+      {text}
+    </LabelWrapper>
+  );
 };
 
 type colorType = Pick<ILabel, 'colorCode'>;
+const IconWrapper = styled.div`
+  width: 24px;
+  @media screen and (max-width: 768px) {
+    width: 16px;
+  }
+  margin-right: 0.5rem;
+`;
 
 const LabelWrapper = styled.div<colorType>`
-  padding: 0.6rem 1rem;
+  box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
+  margin: 0 0.5rem;
+  cursor: pointer;
+  padding: 0.4rem 1rem;
   width: fit-content;
+  ${({ theme }) => theme.style.flexCenter};
   background-color: ${({ colorCode }) => colorCode};
   color: ${({ colorCode }) => setTextColor(colorCode)};
   border: none;
+  font-size: ${({ theme }) => theme.fontSize.L};
+  @media screen and (max-width: 768px) {
+    font-size: ${({ theme }) => theme.fontSize.S};
+  }
   border-radius: ${({ theme }) => theme.border.radius.L};
 `;
 export default Label;

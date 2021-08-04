@@ -11,8 +11,10 @@ interface IAuthor {
 const Author = ({ id, name, imgUrl }: IAuthor) => {
   const [filterIndex, setFilterIndex] = useRecoilState(filterIndexAtom);
   const isChecked = filterIndex.includes(id);
+  
   const check = () =>
     setFilterIndex((arr) =>isChecked ? arr.filter((el) => el !== id) : [...arr, id]);
+    
   return (
     <AuthorWrapper onClick={check}>
       <CheckButton isChecked={isChecked} />

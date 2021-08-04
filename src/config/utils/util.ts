@@ -26,3 +26,17 @@ export function setTextColor(code: string): string {
     parseInt(blue, 16) > parseInt('A0', 16);
   return isDark ? '#000000' : '#FFFFFF';
 }
+
+export function debounce<F extends (...args: any) => any>(
+    func: F,
+    delay: number
+   ) {
+    let timeout: NodeJS.Timeout;
+    const debounced = (...args: any) => {
+     clearTimeout(timeout);
+     timeout = setTimeout(() => func(...args), delay);
+    };
+   
+    return debounced as (...args: Parameters<F>) => ReturnType<F>;
+   }
+   

@@ -50,7 +50,7 @@ export const fetchData = selector<IArticle[]>({
   get: async ({ get }) => {
     const page = get(currentPage);
     const filterPerPage = Math.floor(per_page / get(filterIndexAtom).length);
-    console.log(filterPerPage)
+  
     const filterFetch = async (filterIndex: number) => {
       const author = authorList[filterIndex];
 

@@ -5,7 +5,7 @@ const FilterModal = () => {
   return (
     <ModalWrapper>
       {authorList.map((author) => (
-        <Author {...author} />
+        <Author key={author.id} {...author} />
       ))}
     </ModalWrapper>
   );
@@ -26,17 +26,18 @@ from {
 `;
 
 const ModalWrapper = styled.div`
+  z-index: 2;
   padding: 0.5rem 0;
   position: absolute;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-  top: 50px;
+  top: 53px;
   left: calc(45% - 35%);
   background: #f9f9f9;
   border-radius: ${({ theme }) => theme.border.radius.L};
   animation: ${ModalAction} 0.1s ease-out;
 `;
 
-const authorList = [
+export const authorList = [
   {
     id: 0,
     name: 'Q',

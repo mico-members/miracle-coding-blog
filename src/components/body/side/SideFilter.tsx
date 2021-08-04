@@ -41,4 +41,8 @@ const SideFilterWrapper = styled.div<{ state: number }>`
   box-shadow: 0 3px 7px rgba(0, 0, 0, 0.5);
   transition: 0.7s ease-in-out;
   transform: ${({ state }) => `translateY(${state + 10}px)`};
+
+  @media screen and (max-width: 1280px) {
+    display: none;
+  }
 `;

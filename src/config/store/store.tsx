@@ -31,9 +31,28 @@ export const filterIndexAtom = atom<number[]>({
   default: [],
 });
 
-const bodyParser = ({ body, base, user, number }: IPR) => {
+const bodyParser = ({
+  body,
+  base,
+  user,
+  number,
+  html_url,
+  created_at,
+}: IPR) => {
   const info = body.split('|');
-  if (info.length !== 16) return { id: -1 };
+  if (info.length !== 16) {
+    const date = new Date(created_at);
+    const month = date.getMonth() + 1;
+    return {
+      id: number,
+      link: html_url,
+      userImgUrl: user.avatar_url,
+      userName: base.ref,
+      date: `${date.getFullYear()}-${
+        month > 9 ? month : '0' + month.toString()
+      }-${date.getDate()}`,
+    };
+  }
   const link = info[14].match(/\([^)]+\)/)?.[0].replace(/[\(\)]/g, '');
   return {
     id: number,
@@ -61,7 +80,7 @@ export const fetchData = selector<IArticle[]>({
         },
       );
       const data = await response.json();
-      return data.map(bodyParser).filter(({ id }: { id: number }) => id !== -1);
+      return data.map(bodyParser);
     };
 
     const defaultFetch = async () => {
@@ -75,9 +94,7 @@ export const fetchData = selector<IArticle[]>({
           },
         );
         const data = await response.json();
-        return data
-          .map(bodyParser)
-          .filter(({ id }: { id: number }) => id !== -1);
+        return data.map(bodyParser);
       } catch (error) {
         console.error(error);
       }

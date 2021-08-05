@@ -14,7 +14,7 @@ export function timeCalculator(created: string) {
   }
 
   return created;
-} 
+}
 
 export function setTextColor(code: string): string {
   const red = code.slice(1, 3);
@@ -28,18 +28,16 @@ export function setTextColor(code: string): string {
 }
 
 export function debounce<F extends (...args: any) => any>(
-    func: F,
-    delay: number
-   ) {
-    let timeout: NodeJS.Timeout;
-    const debounced = (...args: any) => {
-     clearTimeout(timeout);
-     timeout = setTimeout(() => func(...args), delay);
-    };
-   
-    return debounced as (...args: Parameters<F>) => ReturnType<F>;
-   }
-   
+  func: F,
+  delay: number,
+) {
+  let timeout: NodeJS.Timeout;
+  const debounced = (...args: any) => {
+    clearTimeout(timeout);
+    timeout = setTimeout(() => func(...args), delay);
+  };
+
+  return debounced as (...args: Parameters<F>) => ReturnType<F>;
 }
 
 type TConditionEmoji = '😥' | '😑' | '🙂' | '😀' | '😆👍' | '❓';
@@ -52,4 +50,3 @@ export function renderConditionEmoji(condition: number): TConditionEmoji {
   if (condition <= 10) return '😆👍';
   return '❓';
 }
-

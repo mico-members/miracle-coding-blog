@@ -5,10 +5,7 @@ import Label from './Label';
 const Header = () => {
   return (
     <HeaderWrapper>
-  
-        
-        <Filter />
- 
+      <Filter />
       <Title>🌈 Miracle Coding Blog 🌈</Title>
     </HeaderWrapper>
   );
@@ -16,10 +13,6 @@ const Header = () => {
 
 const HeaderWrapper = styled.div`
   ${({ theme }) => theme.style.flexColumn}
-`;
-
-const LabelWrapper = styled.div`
-  display: flex;
 `;
 
 const Title = styled.div`

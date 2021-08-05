@@ -35,13 +35,14 @@ const Articles = () => {
       });
   }, [articleList]);
 
+  const len = articles.length-2 < 0 ? 0 : articles.length-2
   return (
     <ArticlesWrapper>
       {articles.map(
         ({ id, date, link, condition, userImgUrl, userName }, index) => (
           <ArticleItem
             refCallback={
-              8 === index ? lastArticleElementRef : null
+              index === len ? lastArticleElementRef : null
             }
             key={id}
             {...{ date, link, condition, userImgUrl, userName }}

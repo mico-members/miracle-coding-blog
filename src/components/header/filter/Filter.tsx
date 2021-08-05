@@ -16,9 +16,19 @@ const Filter = () => {
     document.addEventListener('click', blur);
     return () => document.removeEventListener('click', blur);
   });
+  const gitLink = 'https://github.com/mico-members/miracle-coding';
+  const gitClickHandler = () => {
+    window.open(gitLink, '_blank');
+  };
+
   return (
     <FilterWrapper ref={currentDOM}>
-      <Label icon={<Git />} colorCode="#ABCDEF" text="GitHub" />
+      <Label
+        icon={<Git />}
+        colorCode="#ABCDEF"
+        text="GitHub"
+        onClick={gitClickHandler}
+      />
       <Label
         icon={isOn ? <UpIcon /> : <DownIcon />}
         text={'닉네임'}

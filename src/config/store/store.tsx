@@ -40,29 +40,43 @@ const bodyParser = ({
   created_at,
 }: IPR) => {
   const info = body.split('|');
+  const date = new Date(created_at);
+  const year = date.getFullYear();
+  const month =
+    date.getMonth() < 9
+      ? '0' + (date.getMonth() + 1).toString()
+      : date.getMonth() + 1;
+  const day =
+    date.getDate() < 10 ? '0' + date.getDate().toString() : date.getDate();
+  const validatedDate = `${year}-${month}-${day}`;
+
   if (info.length !== 16) {
-    const date = new Date(created_at);
-    const month = date.getMonth() + 1;
     return {
       id: number,
       link: html_url,
       prLink: html_url,
       userImgUrl: user.avatar_url,
       userName: base.ref,
-      date: `${date.getFullYear()}-${
-        month > 9 ? month : '0' + month.toString()
-      }-${date.getDate()}`,
+      date: validatedDate,
     };
   }
-  const link = info[14].match(/\([^)]+\)/)?.[0].replace(/[\(\)]/g, '');
+
+  const dateInput = info[11];
+  const conditionInput = info[13];
+  const linkInput = info[14];
+  const link = linkInput.match(/\([^)]+\)/)?.[0].replace(/[\(\)]/g, '');
+
   return {
     id: number,
-    link: link || '잘못된 링크입니다.',
+    link: link || html_url,
     prLink: html_url,
-    condition: parseInt(info[13].trim()),
+    condition: isNaN(+conditionInput.trim()) ? -1 : +conditionInput.trim(),
     userImgUrl: user.avatar_url,
     userName: base.ref,
-    date: info[11],
+    date:
+      new Date(dateInput).toString() === 'Invalid Date'
+        ? validatedDate
+        : dateInput,
   };
 };
 
@@ -71,7 +85,7 @@ export const fetchData = selector<IArticle[]>({
   get: async ({ get }) => {
     const page = get(currentPage);
     const filterPerPage = Math.floor(per_page / get(filterIndexAtom).length);
-  
+
     const filterFetch = async (filterIndex: number) => {
       const author = authorList[filterIndex];
 

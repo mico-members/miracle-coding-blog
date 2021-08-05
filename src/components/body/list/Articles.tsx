@@ -60,6 +60,7 @@ const Articles = () => {
 const ArticlesWrapper = styled.ul`
   ${({ theme }) => theme.style.flexColumn};
   gap: 1rem;
+  margin-bottom: 1rem;
 `;
 
 export default Articles;

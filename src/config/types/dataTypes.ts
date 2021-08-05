@@ -3,6 +3,8 @@ export interface IPR {
   base: { ref: string };
   user: { avatar_url: string };
   number: number;
+  html_url: string;
+  created_at: string;
 }
 
 export interface IArticle {

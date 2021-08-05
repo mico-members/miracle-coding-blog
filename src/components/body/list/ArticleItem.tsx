@@ -1,6 +1,9 @@
 import styled from 'styled-components';
 import { IArticleItem } from '../../../config/types/componentTypes';
-import { timeCalculator } from '../../../config/utils/util';
+import {
+  renderConditionEmoji,
+  timeCalculator,
+} from '../../../config/utils/util';
 
 export const ArticleItem = ({
   refCallback,
@@ -21,7 +24,10 @@ export const ArticleItem = ({
         <UserName>{userName}</UserName>
       </ArticleAuthor>
       <ArticleContent>
-        <span>😀 {condition}/10</span>
+        <div>
+          <span className="emoji">{renderConditionEmoji(+condition)}</span>
+          <span className="condition">{condition}/10</span>
+        </div>
         <span>{timeCalculator(date)}</span>
       </ArticleContent>
     </ArticleItemWrapper>
@@ -60,10 +66,13 @@ const UserName = styled.span`
 
 const ArticleContent = styled.div`
   ${({ theme }) => theme.style.flexSpaceBetween}
-  span {
-    :first-child {
-      margin-left: 50px;
-    }
+
+  .emoji {
+    font-size: ${({ theme }) => theme.fontSize.L};
+    margin-left: 3.4rem;
+  }
+  .condition {
     font-size: ${({ theme }) => theme.fontSize.M};
+    margin-left: 0.4rem;
   }
 `;

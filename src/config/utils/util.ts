@@ -40,3 +40,16 @@ export function debounce<F extends (...args: any) => any>(
     return debounced as (...args: Parameters<F>) => ReturnType<F>;
    }
    
+}
+
+type TConditionEmoji = '😥' | '😑' | '🙂' | '😀' | '😆👍' | '❓';
+
+export function renderConditionEmoji(condition: number): TConditionEmoji {
+  if (condition >= 0 && condition <= 2) return '😥';
+  if (condition <= 4) return '😑';
+  if (condition <= 6) return '🙂';
+  if (condition <= 8) return '😀';
+  if (condition <= 10) return '😆👍';
+  return '❓';
+}
+

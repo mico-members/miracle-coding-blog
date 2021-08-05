@@ -9,27 +9,30 @@ const Articles = () => {
   const [pageNum, setPageNum] = useRecoilState(currentPage);
   const articleList = useRecoilValueLoadable(fetchData);
   const [articles, setArticles] = useState<IArticle[]>([]);
+  const [isOver, setOver] = useState<boolean>(false);
 
   const observer = useRef<IntersectionObserver>();
 
-  const lastArticleElementRef = useCallback((node) => {
-    if (observer.current) observer.current.disconnect();
-    observer.current = new IntersectionObserver((entries) => {
-      if (entries[0].isIntersecting) {
-        setPageNum((prevPageNum) => prevPageNum + 1);
-      }
-    });
-    if (node) observer.current.observe(node);
-  }, []);
+  const lastArticleElementRef = useCallback(
+    (node) => {
+      if (observer.current) observer.current.disconnect();
+      observer.current = new IntersectionObserver((entries) => {
+        if (entries[0].isIntersecting && !isOver) {
+          setPageNum((prevPageNum) => prevPageNum + 1);
+        }
+      });
+      if (node) observer.current.observe(node);
+    },
+    [isOver],
+  );
 
   useEffect(() => {
-    if (articleList.state === 'hasValue') {
-      console.log(articleList.contents)
-      setArticles((articles) => {
+    if (articleList.state === 'hasValue')
+      if (articleList.contents.length === 0) setOver(true);
+      else  setArticles((articles) => {
         if (pageNum === 1) return articleList.contents;
         return [...articles, ...articleList.contents];
       });
-    }
   }, [articleList]);
 
   return (

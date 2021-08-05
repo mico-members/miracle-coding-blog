@@ -34,5 +34,6 @@ export interface DefaultTheme {
     flexSpaceBetween: string;
     flexAlignItemsCenter: string;
     flexCenter: string;
+    skeletonStyles: string;
   };
 }

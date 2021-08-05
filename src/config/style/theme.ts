@@ -23,6 +23,11 @@ const flexColumn = css`
   width: 100%;
 `;
 
+const skeletonStyles = css`
+  background-color: #d6d6d6;
+  border-radius: 0.4rem;
+`;
+
 const theme: DefaultTheme = {
   fontFamily: 'Noto Sans KR',
   fontWeight: {
@@ -60,6 +65,7 @@ const theme: DefaultTheme = {
     flexSpaceBetween: `${flexSpaceBetween}`,
     flexAlignItemsCenter: `${flexAlignItemsCenter}`,
     flexCenter: `${flexCenter}`,
+    skeletonStyles: `${skeletonStyles}`,
   },
 };
 

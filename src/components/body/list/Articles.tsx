@@ -45,7 +45,7 @@ const Articles = () => {
         {articles.map(
           ({ id, date, link, condition, userImgUrl, userName }, index) => (
             <ArticleItem
-              refCallback={8 === index ? lastArticleElementRef : null}
+              refCallback={index === len ? lastArticleElementRef : null}
               key={id}
               {...{ date, link, condition, userImgUrl, userName }}
             />

@@ -15,7 +15,7 @@ body{
 
 #root{
     padding: 3rem 0; 
-    max-width: 720px;
+    max-width: 768px;
     margin: 0 auto;
 }
 

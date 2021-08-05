@@ -14,6 +14,32 @@ export function timeCalculator(created: string) {
   }
 
   return created;
+} 
+
+export function setTextColor(code: string): string {
+  const red = code.slice(1, 3);
+  const green = code.slice(3, 5);
+  const blue = code.slice(5, 7);
+  const isDark =
+    parseInt(red, 16) > parseInt('A0', 16) &&
+    parseInt(green, 16) > parseInt('A0', 16) &&
+    parseInt(blue, 16) > parseInt('A0', 16);
+  return isDark ? '#000000' : '#FFFFFF';
+}
+
+export function debounce<F extends (...args: any) => any>(
+    func: F,
+    delay: number
+   ) {
+    let timeout: NodeJS.Timeout;
+    const debounced = (...args: any) => {
+     clearTimeout(timeout);
+     timeout = setTimeout(() => func(...args), delay);
+    };
+   
+    return debounced as (...args: Parameters<F>) => ReturnType<F>;
+   }
+   
 }
 
 type TConditionEmoji = '😥' | '😑' | '🙂' | '😀' | '😆👍' | '❓';
@@ -26,3 +52,4 @@ export function renderConditionEmoji(condition: number): TConditionEmoji {
   if (condition <= 10) return '😆👍';
   return '❓';
 }
+

@@ -20,7 +20,11 @@ module.exports = () => {
         {
           test: /\.(js|jsx|ts|tsx)$/,
           exclude: /node_modules/,
-          use: ['babel-loader', 'ts-loader'],
+          use: ['babel-loader'],
+        },
+        {
+          test: /\.svg$/,
+          use: ['@svgr/webpack'],
         },
       ],
     },

@@ -7,9 +7,10 @@ interface IAuthor {
   id: number;
   name: string;
   imgUrl: string;
+  colorCode: string;
 }
- 
-const Author = ({ id, name, imgUrl }: IAuthor) => {
+
+const Author = ({ colorCode, id, name, imgUrl }: IAuthor) => {
   const [filterIndex, setFilterIndex] = useRecoilState(filterIndexAtom);
   const [pageNum, setPageNum] = useRecoilState(currentPage);
   const isChecked = filterIndex.includes(id);
@@ -18,46 +19,19 @@ const Author = ({ id, name, imgUrl }: IAuthor) => {
     setFilterIndex((arr) =>
       isChecked ? arr.filter((el) => el !== id) : [...arr, id],
     );
-  console.log(pageNum); 
   useEffect(() => {
     setPageNum(1);
   }, [isChecked]);
+
   return (
     <AuthorWrapper onClick={check}>
-      {/* <CheckButton isChecked={isChecked} /> */}
-      <User {...{ isChecked }}>
+      <User {...{ colorCode, isChecked }}>
         <UserImg src={imgUrl} />
         <UserName>{name}</UserName>
       </User>
     </AuthorWrapper>
   );
 };
-const CheckButton = ({ isChecked }: { isChecked: boolean }) =>
-  isChecked ? (
-    <svg
-      width="25"
-      height="25"
-      viewBox="0 0 25 25"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <circle cx="12.5" cy="12.5" r="11" stroke="black" stroke-width="3" />
-      <path
-        d="M10.4166 15.4167L7.49993 12.5L6.52771 13.4722L10.4166 17.3611L18.7499 9.02778L17.7777 8.05556L10.4166 15.4167Z"
-        fill="black"
-      />
-    </svg>
-  ) : (
-    <svg
-      width="25"
-      height="25"
-      viewBox="0 0 25 25"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <circle cx="12.5" cy="12.5" r="11" stroke="black" stroke-width="3" />
-    </svg>
-  );
 
 const AuthorWrapper = styled.div`
   position: relative;
@@ -66,15 +40,17 @@ const AuthorWrapper = styled.div`
   align-items: center;
   margin: 0.6rem 1rem;
 `;
-const User = styled.div<{ isChecked: boolean }>`
+
+type colorCode = Pick<IAuthor, 'colorCode'>;
+const User = styled.div<{ isChecked: boolean } & colorCode>`
   cursor: pointer;
   position: relative;
   width: 170px;
   height: 42px;
-  background: ${({ isChecked }) => (isChecked ? '#b5eaea' : 'none')};
+  background: ${({ isChecked, colorCode }) => (isChecked ? colorCode : 'none')};
   border-radius: ${({ theme }) => theme.border.radius.S};
   &:hover {
-    background: #b5eaea;
+    background: ${({ colorCode }) => colorCode};
   }
 `;
 const UserImg = styled.img`
@@ -84,6 +60,8 @@ const UserImg = styled.img`
   width: 25px;
   height: 25px;
   border-radius: 50%;
+  padding: 1px;
+  border: 2px solid rgb(210 210 210);
 `;
 const UserName = styled.div`
   position: absolute;

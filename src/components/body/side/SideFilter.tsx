@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import styled, { keyframes } from 'styled-components';
+import { theme } from '../../../config/style/theme';
 import { debounce } from '../../../config/utils/util';
 import Author from '../../header/filter/Author';
 import { authorList } from '../../header/filter/FilterModal';
@@ -15,7 +16,7 @@ function SideFilter() {
   return (
     <SideFilterWrapper {...{ state }}>
       {authorList.map((author) => (
-        <Author key={'side' + `${author.id}`} {...author} />
+        <Author colorCode={'#e8e8e8'} key={'side' + `${author.id}`} {...author} />
       ))}
     </SideFilterWrapper>
   );
@@ -36,9 +37,9 @@ const SideFilterWrapper = styled.div<{ state: number }>`
   padding: 1rem 0;
   top: 0;
   right: -280px;
-  background-color: #abcdef;
+  background-color: ${({theme}) => theme.color.gray};
   border-radius: 1rem;
-  box-shadow: 0 3px 7px rgba(0, 0, 0, 0.5);
+  box-shadow: rgb(85 91 255) 0px 0px 0px 2px, rgb(31 193 27) 0px 0px 0px 4px, rgb(255 217 19) 0px 0px 0px 6px, rgb(255 156 85) 0px 0px 0px 8px, rgb(255 85 85) 0px 0px 0px 10px;
   transition: 0.7s ease-in-out;
   transform: ${({ state }) => `translateY(${state + 10}px)`};
 

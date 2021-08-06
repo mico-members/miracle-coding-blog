@@ -1,11 +1,13 @@
 import styled, { keyframes } from 'styled-components';
+import { theme } from '../../../config/style/theme';
 import Author from './Author';
+
 
 const FilterModal = () => {
   return (
-    <ModalWrapper>
+    <ModalWrapper> 
       {authorList.map((author) => (
-        <Author key={author.id} {...author} />
+        <Author colorCode={theme.color.mint} key={author.id} {...author} />
       ))}
     </ModalWrapper>
   );
@@ -32,7 +34,7 @@ const ModalWrapper = styled.div`
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
   top: 53px;
   left: calc(45% - 35%);
-  background: #f9f9f9;
+  background: ${({theme}) => theme.color.gray};
   border-radius: ${({ theme }) => theme.border.radius.L};
   animation: ${ModalAction} 0.1s ease-out;
 `;

@@ -12,16 +12,24 @@ export const ArticleItem = ({
   userImgUrl,
   userName,
   date,
+  prLink,
 }: IArticleItem) => {
   const handleClickArticle = () => {
     window.open(link, '_blank');
   };
 
+  const handleClickPrBtn = () => {
+    window.open(prLink, '_blank');
+  };
+
   return (
     <ArticleItemWrapper ref={refCallback} onClick={handleClickArticle}>
       <ArticleAuthor>
-        <UserImg src={userImgUrl} />
-        <UserName>{userName}</UserName>
+        <div className="author">
+          <UserImg src={userImgUrl} />
+          <UserName>{userName}</UserName>
+        </div>
+        <PrBtn onClick={handleClickPrBtn}>comment</PrBtn>
       </ArticleAuthor>
       <ArticleContent>
         <div>
@@ -50,6 +58,13 @@ const ArticleItemWrapper = styled.li`
 const ArticleAuthor = styled.div`
   ${({ theme }) => theme.style.flexAlignItemsCenter}
   margin-bottom: 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .author {
+    display: flex;
+  }
 `;
 
 const UserImg = styled.img`
@@ -58,10 +73,12 @@ const UserImg = styled.img`
   border-radius: 50%;
 `;
 
-const UserName = styled.span`
+const UserName = styled.div`
   margin-left: 1rem;
   font-size: ${({ theme }) => theme.fontSize.XL};
   font-weight: ${({ theme }) => theme.fontWeight.bold};
+  display: flex;
+  align-items: center;
 `;
 
 const ArticleContent = styled.div`
@@ -74,5 +91,19 @@ const ArticleContent = styled.div`
   .condition {
     font-size: ${({ theme }) => theme.fontSize.M};
     margin-left: 0.4rem;
+  }
+`;
+
+const PrBtn = styled.button`
+  all: unset;
+  background-color: #d3e0ea;
+  border-radius: 8px;
+  padding: 0.5rem 1rem;
+  font-size: 14px;
+
+  &:hover {
+    cursor: pointer;
+    background-color: #1687a7;
+    color: white;
   }
 `;

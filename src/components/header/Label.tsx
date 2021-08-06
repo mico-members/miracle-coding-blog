@@ -6,7 +6,7 @@ const Label = ({ icon, colorCode, text, onClick }: ILabel) => {
   return (
     <LabelWrapper {...{ colorCode, onClick }}>
       <IconWrapper>{icon}</IconWrapper>
-      {text}
+      <div>{text}</div>
     </LabelWrapper>
   );
 };
@@ -18,6 +18,7 @@ const IconWrapper = styled.div`
     width: 16px;
   }
   margin-right: 0.5rem;
+  margin-top: 3px;
 `;
 
 const LabelWrapper = styled.div<colorType>`
@@ -35,5 +36,12 @@ const LabelWrapper = styled.div<colorType>`
     font-size: ${({ theme }) => theme.fontSize.S};
   }
   border-radius: ${({ theme }) => theme.border.radius.L};
+  display: flex;
+  align-items: center;
+
+  div {
+    margin-top: 3px;
+    font-size: 14px;
+  }
 `;
 export default Label;

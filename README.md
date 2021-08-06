@@ -1,4 +1,5 @@
 
+
 # 🌈 미코 블로그 🌈
 
 
@@ -68,3 +69,4 @@ DB , Back sever 구현
 | 😎 Seong  | [링크](https://github.com/GleamingStar) |
 | 🍁 Autumn | [링크](https://github.com/dyongdi) |
 | 🥐 Eamon  | [링크](https://github.com/eamon3481) |
+

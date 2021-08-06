@@ -5,8 +5,8 @@ const ArticlesSkeleton = () => {
   const NUM_OF_SKELETON_UI = 6;
   return (
     <ArticlesSkeletonWrapper>
-      {new Array(NUM_OF_SKELETON_UI).fill(0).map((el) => (
-        <ArticleItemSkeleton />
+      {new Array(NUM_OF_SKELETON_UI).fill(0).map((el,index) => (
+        <ArticleItemSkeleton key={index}/>
       ))}
     </ArticlesSkeletonWrapper>
   );

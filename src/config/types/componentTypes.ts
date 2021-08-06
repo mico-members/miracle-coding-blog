@@ -14,4 +14,5 @@ export interface IArticleItem {
   userImgUrl: string;
   userName: string;
   date: string;
+  prLink: string;
 }

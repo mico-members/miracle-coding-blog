@@ -43,11 +43,11 @@ const Articles = () => {
     <>
       <ArticlesWrapper>
         {articles.map(
-          ({ id, date, link, condition, userImgUrl, userName }, index) => (
+          ({ id, date, link, condition, userImgUrl, userName, prLink }, index) => (
             <ArticleItem
               refCallback={index === len ? lastArticleElementRef : null}
               key={id}
-              {...{ date, link, condition, userImgUrl, userName }}
+              {...{ date, link, condition, userImgUrl, userName,prLink }}
             />
           ),
         )}

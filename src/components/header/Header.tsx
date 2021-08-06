@@ -18,7 +18,7 @@ const HeaderWrapper = styled.div`
 const Title = styled.div`
   ${({ theme }) => theme.style.flexCenter};
   width: 100%;
-  padding: 2rem 0;
+  padding: 3rem 0;
 
   font-size: ${({ theme }) => theme.fontSize.XXL};
   @media screen and (max-width: 768px) {

@@ -1,5 +1,5 @@
 import { atom, selector } from 'recoil';
-import { IArticle, IPR,IUser } from '../types/dataTypes';
+import { IArticle, IPR, IUser } from '../types/dataTypes';
 
 const per_page = 10;
 
@@ -9,7 +9,7 @@ export const userSelector = selector({
     const userMap = new Map();
     process.env.USER_BRANCH?.split('&').forEach((v) => {
       const [branch, user] = v.split(':');
-      userMap.set( user,branch);
+      userMap.set(user, branch);
     });
 
     const response = await fetch(
@@ -23,10 +23,16 @@ export const userSelector = selector({
 
     const data = await response.json();
 
-    return data.map((v: any) => ({
-      userName: userMap.get(v.login),
-      userImgUrl: v.avatar_url,
-      id: v.id
+    interface userDataType {
+      login: string;
+      avatar_url: string;
+      id: number;
+    }
+    
+    return data.map(({ login, avatar_url, id }: userDataType) => ({
+      userName: userMap.get(login),
+      userImgUrl: avatar_url,
+      id: id,
     }));
   },
 });
@@ -40,8 +46,6 @@ export const currentPage = atom<number>({
   key: 'currentPage',
   default: 1,
 });
-
-
 
 export const filterIndexAtom = atom<number[]>({
   key: 'filterIndex',
@@ -100,12 +104,12 @@ const bodyParser = ({
 export const fetchData = selector<IArticle[]>({
   key: 'fetchDataSelector',
   get: async ({ get }) => {
-    const user = get(userSelector)
+    const user = get(userSelector);
     const page = get(currentPage);
     const filterPerPage = Math.floor(per_page / get(filterIndexAtom).length);
 
     const filterFetch = async (filterIndex: number) => {
-      const author = user.filter((v : IUser)=> v.id === filterIndex)[0];
+      const author = user.filter((v: IUser) => v.id === filterIndex)[0];
 
       const response = await fetch(
         `https://api.github.com/repos/mico-members/miracle-coding/pulls?state=closed&per_page=

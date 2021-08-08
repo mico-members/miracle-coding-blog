@@ -1,18 +1,16 @@
 import { useEffect } from 'react';
-import { useRecoilState } from 'recoil';
+import { useRecoilState, useSetRecoilState } from 'recoil';
 import styled from 'styled-components';
 import { currentPage, filterIndexAtom } from '../../../config/store/store';
+import { IUser } from '../../../config/types/dataTypes';
 
-interface IAuthor {
-  id: number;
-  name: string;
-  imgUrl: string;
+interface IAuthor extends IUser{
   colorCode: string;
 }
 
-const Author = ({ colorCode, id, name, imgUrl }: IAuthor) => {
+const Author = ({ colorCode, id, userImgUrl, userName }: IAuthor) => {
   const [filterIndex, setFilterIndex] = useRecoilState(filterIndexAtom);
-  const [pageNum, setPageNum] = useRecoilState(currentPage);
+  const setPageNum = useSetRecoilState(currentPage);
   const isChecked = filterIndex.includes(id);
 
   const check = () =>
@@ -26,8 +24,8 @@ const Author = ({ colorCode, id, name, imgUrl }: IAuthor) => {
   return (
     <AuthorWrapper onClick={check}>
       <User {...{ colorCode, isChecked }}>
-        <UserImg src={imgUrl} />
-        <UserName>{name}</UserName>
+        <UserImg src={userImgUrl} />
+        <UserName>{userName}</UserName>
       </User>
     </AuthorWrapper>
   );
@@ -49,8 +47,11 @@ const User = styled.div<{ isChecked: boolean } & colorCode>`
   height: 42px;
   background: ${({ isChecked, colorCode }) => (isChecked ? colorCode : 'none')};
   border-radius: ${({ theme }) => theme.border.radius.S};
-  &:hover {
-    background: ${({ colorCode }) => colorCode};
+
+  @media (hover: hover) {
+    &:hover {
+      background: ${({ colorCode }) => colorCode};
+    }
   }
 `;
 const UserImg = styled.img`

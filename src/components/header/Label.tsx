@@ -4,8 +4,9 @@ import { ILabel } from '../../config/types/componentTypes';
 
 const Label = ({ icon, colorCode, text, onClick }: ILabel) => {
   return (
-    <LabelWrapper {...{ colorCode, onClick }}>
+    <LabelWrapper className={"Label"} {...{ colorCode, onClick }}>
       <IconWrapper>{icon}</IconWrapper>
+    
       <div>{text}</div>
     </LabelWrapper>
   );

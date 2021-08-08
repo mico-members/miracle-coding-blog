@@ -1,7 +1,41 @@
-import { atom, constSelector, selector } from 'recoil';
-import { IArticle, IPR } from '../types/dataTypes';
+import { atom, selector } from 'recoil';
+import { IArticle, IPR, IUser } from '../types/dataTypes';
 
 const per_page = 10;
+
+export const userSelector = selector({
+  key: 'userSelector',
+  get: async ({ get }) => {
+    const userMap = new Map();
+    process.env.USER_BRANCH?.split('&').forEach((v) => {
+      const [branch, user] = v.split(':');
+      userMap.set(user, branch);
+    });
+
+    const response = await fetch(
+      `https://api.github.com/repos/mico-members/miracle-coding/collaborators`,
+      {
+        headers: {
+          Authorization: `token ${process.env.WEBPACK_GITHUB_TOKEN}`,
+        },
+      },
+    );
+
+    const data = await response.json();
+
+    interface userDataType {
+      login: string;
+      avatar_url: string;
+      id: number;
+    }
+    
+    return data.map(({ login, avatar_url, id }: userDataType) => ({
+      userName: userMap.get(login),
+      userImgUrl: avatar_url,
+      id: id,
+    }));
+  },
+});
 
 export const articleListAtom = atom<IArticle[]>({
   key: 'articleList',
@@ -12,19 +46,6 @@ export const currentPage = atom<number>({
   key: 'currentPage',
   default: 1,
 });
-
-const authorList = [
-  'Q',
-  'Daisy',
-  'goody',
-  'adela',
-  'Seong',
-  'eamon',
-  'Tami',
-  'autumn',
-  'eve',
-  'swing',
-];
 
 export const filterIndexAtom = atom<number[]>({
   key: 'filterIndex',
@@ -83,15 +104,16 @@ const bodyParser = ({
 export const fetchData = selector<IArticle[]>({
   key: 'fetchDataSelector',
   get: async ({ get }) => {
+    const user = get(userSelector);
     const page = get(currentPage);
     const filterPerPage = Math.floor(per_page / get(filterIndexAtom).length);
 
     const filterFetch = async (filterIndex: number) => {
-      const author = authorList[filterIndex];
+      const author = user.filter((v: IUser) => v.id === filterIndex)[0];
 
       const response = await fetch(
         `https://api.github.com/repos/mico-members/miracle-coding/pulls?state=closed&per_page=
-        ${filterPerPage}&page=${page}&base=${author}`,
+        ${filterPerPage}&page=${page}&base=${author.userName}`,
         {
           headers: {
             Authorization: `token ${process.env.WEBPACK_GITHUB_TOKEN}`,

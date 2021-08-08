@@ -11,9 +11,9 @@ const Filter = () => {
 
   const currentDOM = useRef<HTMLDivElement>(null);
 
-  const blur = (ev: globalThis.MouseEvent) =>
-    !currentDOM.current?.contains(ev.target as HTMLDivElement) && setOn(false);
-
+  const blur = () => {
+    setOn(false);
+  };
   useEffect(() => {
     document.addEventListener('click', blur);
     return () => document.removeEventListener('click', blur);
@@ -21,13 +21,14 @@ const Filter = () => {
 
   const gitLink = 'https://github.com/mico-members/miracle-coding';
 
-  const gitClickHandler = (e: MouseEvent) => {
+  const gitClickHandler = () => {
     window.open(gitLink, '_blank');
   };
   const popUpClickHandler = (e: MouseEvent) => {
     e.stopPropagation();
     setOn((status) => !status);
   };
+  //현재 이벤트 이후의 전파를 막습니다.
 
   return (
     <LabelWrapper>

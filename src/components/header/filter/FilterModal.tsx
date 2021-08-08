@@ -22,12 +22,15 @@ export default FilterModal;
 
 const ModalAction = keyframes`
 from {
-    transform: translateY(8px);
+    transform: translateY(2rem);
     opacity:0
   }
 
   to {
-    transform: translateY(0px);
+    transform: translateY(1rem);
+    @media screen and (max-width: 768px) {
+      transform: translateY(1.2rem);
+    }
     opacity:1
   }
 `;
@@ -37,13 +40,12 @@ const ModalWrapper = styled.div`
   padding: 0.5rem 0;
   position: absolute;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-  top: 3.6rem;
-  @media screen and (max-width: 768px) {
-    top: 3rem;
-  }
+  //top: 3.6rem;
+  //transform: translateY(3.6rem);
+ 
   right: 0;
   background: ${({ theme }) => theme.color.gray};
   border-radius: ${({ theme }) => theme.border.radius.L};
   animation: ${ModalAction} 0.1s ease-out;
+  animation-fill-mode: forwards;
 `;
-

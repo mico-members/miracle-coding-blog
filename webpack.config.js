@@ -41,6 +41,7 @@ module.exports = () => {
       }),
       new webpack.EnvironmentPlugin({
         WEBPACK_GITHUB_TOKEN: process.env.GITHUB_TOKEN,
+        USER_BRANCH: process.env.USER_BRANCH,
       }),
     ],
   };

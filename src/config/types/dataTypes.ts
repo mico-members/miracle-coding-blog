@@ -7,12 +7,15 @@ export interface IPR {
   created_at: string;
 }
 
-export interface IArticle {
-  id: number;
+export interface IArticle extends IUser {
   link: string;
   condition: number;
-  userImgUrl: string;
-  userName: string;
   date: string;
-  prLink:string;
+  prLink: string;
+}
+
+export interface IUser {
+  userName: string;
+  userImgUrl: string;
+  id: number;
 }

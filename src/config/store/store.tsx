@@ -17,6 +17,7 @@ export const userSelector = selector({
       {
         headers: {
           Authorization: `token ${process.env.WEBPACK_GITHUB_TOKEN}`,
+          'Cache-Control': 'no-cache',
         },
       },
     );
@@ -28,7 +29,7 @@ export const userSelector = selector({
       avatar_url: string;
       id: number;
     }
-    
+
     return data.map(({ login, avatar_url, id }: userDataType) => ({
       userName: userMap.get(login),
       userImgUrl: avatar_url,
@@ -117,6 +118,7 @@ export const fetchData = selector<IArticle[]>({
         {
           headers: {
             Authorization: `token ${process.env.WEBPACK_GITHUB_TOKEN}`,
+            'Cache-Control': 'no-cache',
           },
         },
       );
@@ -131,6 +133,7 @@ export const fetchData = selector<IArticle[]>({
           {
             headers: {
               Authorization: `token ${process.env.WEBPACK_GITHUB_TOKEN}`,
+              'Cache-Control': 'no-cache',
             },
           },
         );

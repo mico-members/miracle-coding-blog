@@ -1,3 +1,4 @@
+import { MouseEvent } from 'react';
 import styled from 'styled-components';
 import { IArticleItem } from '../../../config/types/componentTypes';
 import {
@@ -18,8 +19,9 @@ export const ArticleItem = ({
     window.open(link, '_blank');
   };
 
-  const handleClickPrBtn = () => {
+  const handleClickPrBtn = (e: MouseEvent) => {
     window.open(prLink, '_blank');
+    e.stopPropagation();
   };
 
   return (

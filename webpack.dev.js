@@ -9,5 +9,6 @@ module.exports = merge(common, {
     port: process.env.PORT || 8080,
     open: true,
     historyApiFallback: true,
+    hot: true,
   },
 });

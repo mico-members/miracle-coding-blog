@@ -28,7 +28,7 @@ export const userSelector = selector({
       avatar_url: string;
       id: number;
     }
-    
+
     return data.map(({ login, avatar_url, id }: userDataType) => ({
       userName: userMap.get(login),
       userImgUrl: avatar_url,

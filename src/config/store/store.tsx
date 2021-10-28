@@ -16,7 +16,7 @@ export const userSelector = selector({
       `https://api.github.com/repos/mico-members/miracle-coding/collaborators`,
       {
         headers: {
-          Authorization: `token ${process.env.WEBPACK_GITHUB_TOKEN}`,
+          Authorization: `token ${process.env.GITHUB_TOKEN}`,
         },
       },
     );
@@ -116,7 +116,7 @@ export const fetchData = selector<IArticle[]>({
         ${filterPerPage}&page=${page}&base=${author.userName}`,
         {
           headers: {
-            Authorization: `token ${process.env.WEBPACK_GITHUB_TOKEN}`,
+            Authorization: `token ${process.env.GITHUB_TOKEN}`,
           },
         },
       );
@@ -130,7 +130,7 @@ export const fetchData = selector<IArticle[]>({
           `https://api.github.com/repos/mico-members/miracle-coding/pulls?state=closed&per_page=${per_page}&page=${page}`,
           {
             headers: {
-              Authorization: `token ${process.env.WEBPACK_GITHUB_TOKEN}`,
+              Authorization: `token ${process.env.GITHUB_TOKEN}`,
             },
           },
         );
